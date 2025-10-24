@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canadian Credit Cards Comparison</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        tr:hover {
+            background: #f0f0f0;
+        }
+        .bank-bmo { border-left: 4px solid #0079c1; }
+        .bank-scotia { border-left: 4px solid #ed1c24; }
+        .bank-desjardins { border-left: 4px solid #006341; }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏦 Canadian Credit Cards Comparison</h1>
+        <p style="text-align: center; color: #7f8c8d;">BMO | Scotiabank | Desjardins - October 2025</p>
+        
+        <div class="controls">
+            <button onclick="downloadExcel()">📥 Download Excel File</button>
+            <button onclick="copyToClipboard()">📋 Copy Table</button>
+        </div>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="table-container">
+            <table id="creditCardTable">
+                <thead>
+                    <tr>
+                        <th>Bank</th>
+                        <th>Card Name</th>
+                        <th>Card Type</th>
+                        <th>Annual Fee</th>
+                        <th>Rewards Rate</th>
+                        <th>Welcome Bonus</th>
+                        <th>Purchase Interest Rate</th>
+                        <th>Cash Advance Rate</th>
+                        <th>Foreign Transaction Fee</th>
+                        <th>Key Benefits</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const creditCards = [
+            // BMO Cards
+            {
+                bank: "BMO",
+                cardName: "BMO CashBack Mastercard",
+                cardType: "Cash Back",
+                annualFee: "$0",
+                rewardsRate: "3% groceries, 1% recurring bills, 0.5% other",
+                welcomeBonus: "0.99% intro rate on balance transfers for 9 months",
+                purchaseRate: "21.99%",
+                cashAdvanceRate: "23.99%",
+                foreignFee: "2.5%",
+                benefits: "No annual fee, Highest grocery cash back in Canada for no-fee card"
+            },
+            {
+                bank: "BMO",
+                cardName: "BMO CashBack World Elite Mastercard",
+                cardType: "Cash Back",
+                annualFee: "$120 (waived 1st year)",
+                rewardsRate: "5% groceries & gas, 3% recurring bills, 1% other",
+                welcomeBonus: "Up to 10% cash back first 3 months (max $260)",
+                purchaseRate: "21.99%",
+                cashAdvanceRate: "23.99%",
+                foreignFee: "2.5%",
+                benefits: "Premium cash back rates, Travel insurance, Mobile device insurance"
+            },
+            {
+                bank: "BMO",
+                cardName: "BMO Ascend World Elite Mastercard",
+                cardType: "Travel Rewards",
+                annualFee: "$150 (waived 1st year)",
+                rewardsRate: "5x points travel/dining/gas, 1x other",
+                welcomeBonus: "Up to 100,000 bonus points",
+                purchaseRate: "21.99%",
+                cashAdvanceRate: "23.99%",
+                foreignFee: "2.5%",
+                benefits: "BMO Rewards points, Travel insurance, Airport lounge access"
+            },
+            {
+                bank: "BMO",
+                cardName: "BMO eclipse Visa Infinite Privilege",
+                cardType: "Premium Travel",
+                annualFee: "$499",
+                rewardsRate: "5x points select categories, 1.5x other",
+                welcomeBonus: "Up to 120,000 points + $200 credit",
+                purchaseRate: "21.99%",
+                cashAdvanceRate: "23.99%",
+                foreignFee: "2.5%",
+                benefits: "Premium metal card, Concierge, Priority Pass, Comprehensive insurance"
+            },
+            {
+                bank: "BMO",
+                cardName: "BMO Preferred Rate Mastercard",
+                cardType: "Low Interest",
+                annualFee: "$20",
+                rewardsRate: "N/A",
+                welcomeBonus: "0.99% intro rate on balance transfers for 9 months",
+                purchaseRate: "13.99%",
+                cashAdvanceRate: "13.99%",
+                foreignFee: "2.5%",
+                benefits: "Low interest rate, Purchase protection"
+            },
+            {
+                bank: "BMO",
+                cardName: "BMO AIR MILES World Elite Mastercard",
+                cardType: "Travel Rewards",
+                annualFee: "$120",
+                rewardsRate: "3x miles at partners, 2x groceries/gas, 1x other",
+                welcomeBonus: "Up to 2,500 AIR MILES",
+                purchaseRate: "21.99%",
+                cashAdvanceRate: "23.99%",
+                foreignFee: "2.5%",
+                benefits: "AIR MILES rewards, 25% discount on AIR MILES flights, Travel insurance"
+            },
+            
+            // Scotiabank Cards
+            {
+                bank: "Scotiabank",
+                cardName: "Scotia Momentum Visa Infinite",
+                cardType: "Cash Back",
+                annualFee: "$120 (waived 1st year)",
+                rewardsRate: "4% groceries/bills/subscriptions, 2% gas/transit, 1% other",
+                welcomeBonus: "10% cash back first 3 months (up to $2,000)",
+                purchaseRate: "20.99%",
+                cashAdvanceRate: "22.99%",
+                foreignFee: "2.5%",
+                benefits: "Top cash back rates, Travel insurance, Mobile device insurance, Concierge"
+            },
+            {
+                bank: "Scotiabank",
+                cardName: "Scotiabank Gold American Express",
+                cardType: "Travel Rewards",
+                annualFee: "$120 (waived 1st year)",
+                rewardsRate: "6x Scene+ at select grocers, 5x other groceries, 3x dining/entertainment/gas",
+                welcomeBonus: "Up to 50,000 Scene+ points ($500 value)",
+                purchaseRate: "20.99%",
+                cashAdvanceRate: "22.99%",
+                foreignFee: "0%",
+                benefits: "No FX fees, Scene+ rewards, Travel insurance"
+            },
+            {
+                bank: "Scotiabank",
+                cardName: "Scotiabank Passport Visa Infinite",
+                cardType: "Travel Rewards",
+                annualFee: "$139",
+                rewardsRate: "3x Scene+ groceries, 2x restaurants/entertainment/transit, 1x other",
+                welcomeBonus: "Up to 45,000 Scene+ points ($450 value)",
+                purchaseRate: "20.99%",
+                cashAdvanceRate: "22.99%",
+                foreignFee: "0%",
+                benefits: "No FX fees, 6 free lounge visits, Comprehensive travel insurance"
+            },
+            {
+                bank: "Scotiabank",
+                cardName: "Scotiabank Platinum American Express",
+                cardType: "Travel Rewards",
+                annualFee: "$399 (waived 1st year)",
+                rewardsRate: "2x Scene+ on all purchases",
+                welcomeBonus: "Up to 80,000 Scene+ points ($800 value)",
+                purchaseRate: "20.99%",
+                cashAdvanceRate: "22.99%",
+                foreignFee: "0%",
+                benefits: "No FX fees, 10 free lounge visits, Premium insurance, Concierge"
+            },
+            {
+                bank: "Scotiabank",
+                cardName: "Scene+ Visa Card",
+                cardType: "No Fee Rewards",
+                annualFee: "$0",
+                rewardsRate: "2x Scene+ at select partners, 1x other",
+                welcomeBonus: "Up to 5,000 Scene+ points",
+                purchaseRate: "20.99%",
+                cashAdvanceRate: "22.99%",
+                foreignFee: "2.5%",
+                benefits: "No annual fee, Scene+ rewards, Student-friendly"
+            },
+            {
+                bank: "Scotiabank",
+                cardName: "Scotiabank Value Visa",
+                cardType: "Low Interest",
+                annualFee: "$29",
+                rewardsRate: "N/A",
+                welcomeBonus: "0.99% intro rate on balance transfers for 9 months",
+                purchaseRate: "13.99%",
+                cashAdvanceRate: "13.99%",
+                foreignFee: "2.5%",
+                benefits: "Low interest across all transactions, Car rental discounts"
+            },
+            {
+                bank: "Scotiabank",
+                cardName: "Scotia Momentum Visa",
+                cardType: "Cash Back",
+                annualFee: "$39",
+                rewardsRate: "2% groceries/drugstores/gas/bills, 1% other",
+                welcomeBonus: "2.99% intro rate for 6 months",
+                purchaseRate: "20.99%",
+                cashAdvanceRate: "22.99%",
+                foreignFee: "2.5%",
+                benefits: "Affordable cash back, Travel insurance"
+            },
+            
+            // Desjardins Cards
+            {
+                bank: "Desjardins",
+                cardName: "Desjardins Cash Back World Elite Mastercard",
+                cardType: "Cash Back",
+                annualFee: "$120",
+                rewardsRate: "4% groceries (up to $10k), 3% restaurants/entertainment/transit, 1% other",
+                welcomeBonus: "N/A",
+                purchaseRate: "20.9%",
+                cashAdvanceRate: "21.9%",
+                foreignFee: "2.5%",
+                benefits: "High cash back rates, Mobile device insurance, Travel insurance"
+            },
+            {
+                bank: "Desjardins",
+                cardName: "Desjardins Cash Back Visa/Mastercard",
+                cardType: "Cash Back",
+                annualFee: "$0",
+                rewardsRate: "2% dining/entertainment/transit/bills (up to $3,600), 0.5% other",
+                welcomeBonus: "N/A",
+                purchaseRate: "20.9%",
+                cashAdvanceRate: "21.9%",
+                foreignFee: "2.5%",
+                benefits: "No annual fee, Mobile device insurance, 3-day travel insurance"
+            },
+            {
+                bank: "Desjardins",
+                cardName: "Desjardins Odyssey World Elite Mastercard",
+                cardType: "Travel Rewards",
+                annualFee: "$120",
+                rewardsRate: "3% BONUSDOLLARS groceries, 2% restaurants/entertainment/transit, 1% other",
+                welcomeBonus: "N/A",
+                purchaseRate: "20.9%",
+                cashAdvanceRate: "21.9%",
+                foreignFee: "2.5%",
+                benefits: "BONUSDOLLARS rewards, Comprehensive travel insurance, Lounge access"
+            },
+            {
+                bank: "Desjardins",
+                cardName: "Desjardins Odyssey Visa Infinite Privilege",
+                cardType: "Premium Travel",
+                annualFee: "$399",
+                rewardsRate: "3% BONUSDOLLARS travel/groceries (up to $25k), 2% other categories",
+                welcomeBonus: "N/A",
+                purchaseRate: "20.9%",
+                cashAdvanceRate: "21.9%",
+                foreignFee: "2.5%",
+                benefits: "Premium rewards, Priority Pass, Comprehensive insurance, Concierge"
+            },
+            {
+                bank: "Desjardins",
+                cardName: "Desjardins Odyssey Gold Visa",
+                cardType: "Travel Rewards",
+                annualFee: "$60",
+                rewardsRate: "2% BONUSDOLLARS restaurants/travel/pre-authorized (up to $6k), 2% entertainment/transit",
+                welcomeBonus: "N/A",
+                purchaseRate: "20.9%",
+                cashAdvanceRate: "21.9%",
+                foreignFee: "2.5%",
+                benefits: "BONUSDOLLARS rewards, Travel insurance, Airport lounge discount"
+            },
+            {
+                bank: "Desjardins",
+                cardName: "Desjardins Flexi Visa",
+                cardType: "Low Interest",
+                annualFee: "$0",
+                rewardsRate: "N/A",
+                welcomeBonus: "N/A",
+                purchaseRate: "10.9%",
+                cashAdvanceRate: "12.9%",
+                foreignFee: "2.5%",
+                benefits: "No annual fee, Low interest rate, Car rental discounts"
+            }
+        ];
+
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            creditCards.forEach(card => {
+                const row = document.createElement('tr');
+                row.className = `bank-${card.bank.toLowerCase().replace(' ', '')}`;
+                row.innerHTML = `
+                    <td><strong>${card.bank}</strong></td>
+                    <td><strong>${card.cardName}</strong></td>
+                    <td>${card.cardType}</td>
+                    <td>${card.annualFee}</td>
+                    <td>${card.rewardsRate}</td>
+                    <td>${card.welcomeBonus}</td>
+                    <td>${card.purchaseRate}</td>
+                    <td>${card.cashAdvanceRate}</td>
+                    <td>${card.foreignFee}</td>
+                    <td>${card.benefits}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function downloadExcel() {
+            const wb = XLSX.utils.book_new();
+            
+            // Prepare data for Excel
+            const data = [
+                ['Canadian Credit Cards Comparison - October 2025'],
+                ['Scraped from: BMO, Scotiabank, Desjardins'],
+                [''],
+                ['Bank', 'Card Name', 'Card Type', 'Annual Fee', 'Rewards Rate', 'Welcome Bonus', 'Purchase Interest Rate', 'Cash Advance Rate', 'Foreign Transaction Fee', 'Key Benefits']
+            ];
+            
+            creditCards.forEach(card => {
+                data.push([
+                    card.bank,
+                    card.cardName,
+                    card.cardType,
+                    card.annualFee,
+                    card.rewardsRate,
+                    card.welcomeBonus,
+                    card.purchaseRate,
+                    card.cashAdvanceRate,
+                    card.foreignFee,
+                    card.benefits
+                ]);
+            });
+            
+            const ws = XLSX.utils.aoa_to_sheet(data);
+            
+            // Set column widths
+            ws['!cols'] = [
+                {wch: 15}, {wch: 40}, {wch: 18}, {wch: 15}, 
+                {wch: 50}, {wch: 45}, {wch: 20}, {wch: 20}, 
+                {wch: 20}, {wch: 60}
+            ];
+            
+            XLSX.utils.book_append_sheet(wb, ws, 'Credit Cards');
+            
+            // Generate Excel file
+            XLSX.writeFile(wb, 'Canadian_Credit_Cards_Comparison_2025.xlsx');
+            
+            showStatus('✅ Excel file downloaded successfully!');
+        }
+
+        function copyToClipboard() {
+            const table = document.getElementById('creditCardTable');
+            const range = document.createRange();
+            range.selectNode(table);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            
+            showStatus('✅ Table copied to clipboard!');
+        }
+
+        function showStatus(message) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+
+        // Initialize table on load
+        renderTable();
+    </script>
+</body>
+</html>
