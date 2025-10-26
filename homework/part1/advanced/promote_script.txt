@@ -1,0 +1,5 @@
+Use Puppeteer to visit https://finance.yahoo.com/markets/, scrape table content, and save it in /Users/huiruzhao/Desktop/market_data/market_content.json with the help of the Filesystem plugin.
+
+Use notion to record the scraped and analyzed data in /Users/huiruzhao/Desktop/market_data/market_content.json into my Notion database market_content under page Getting-Started-1f3e1ad36dd580109bd8de573e29bd83.
+
+Use Notion to generate documentation according to the data in the database market_content.
