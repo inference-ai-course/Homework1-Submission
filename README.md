@@ -3,6 +3,35 @@
 This homework helped me understand how to design and ochestrate ai agents using real world tools. 
 This homework uses modular command pipeline style, basically chaining components together to achieve a specific workflow.
 
+## Homework Structure
+
+This submission is divided into two parts, each in its own Jupyter Notebook.
+
+| Part     | Description                                                                                                                   | File Location                                                 |
+| :------- | :---------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------ |
+| **Part 1** | Demonstrates orchestrating various AI agent tools for tasks like web search, GitHub interaction, and file system manipulation. | [`src/main.ipynb`](./src/main.ipynb)                         |
+| **Part 2** | Shows how to interact with a local Ollama instance using Python, both via an OpenAI-compatible endpoint and the native `ollama` library. | [`src/part-2-ollama.ipynb`](./src/part-2-ollama.ipynb) |
+
+## Installation
+
+To run this project, you will need to set up a Conda environment. Follow these steps:
+
+1.  **Create the Conda environment:**
+    ```bash
+    conda create --name homework1 python=3.9
+    ```
+
+2.  **Activate the environment:**
+    ```bash
+    conda activate homework1
+    ```
+
+3.  **Install the required dependencies:**
+    ```bash
+    # This project uses Jupyter Notebook. If you don't have it installed, you can install it with:
+    pip install notebook
+    ```
+
 ## Tasks Overview
 
 This project demonstrates the use of various tools orchestrated by an AI agent to perform a series of tasks. The tasks are documented in the `src/main.ipynb` Jupyter Notebook and are summarized below:
