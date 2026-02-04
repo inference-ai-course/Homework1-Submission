@@ -264,3 +264,48 @@ def save_task_output(
         f.write('\n'.join(content))
     
     return filepath
+
+def append_to_reflection(
+    notebook: str,
+    section_title: str,
+    reflection_content: str,
+    output_dir: Optional[str] = None
+) -> str:
+    """
+    Append reflection to a single consolidated markdown file.
+    
+    Args:
+        notebook: Notebook number (e.g., "02")
+        section_title: Title of the section (e.g., "Task 1: Custom System Prompt")
+        reflection_content: The reflection text to append
+        output_dir: Directory containing the reflection file
+    
+    Returns:
+        Path to the reflection file
+    """
+    from datetime import datetime
+    import os
+    
+    if output_dir is None:
+        output_dir = 'outputs'
+    
+    os.makedirs(output_dir, exist_ok=True)
+    
+    reflection_file = os.path.join(output_dir, 'homework_reflection.md')
+    
+    # Create file with header if it doesn't exist
+    if not os.path.exists(reflection_file):
+        with open(reflection_file, 'w', encoding='utf-8') as f:
+            f.write("# Week 1: LLM Introduction - Homework Reflection\n\n")
+            f.write("**Student Name:** [Your Name Here]\n\n")
+            f.write("**Path Selected:** [A/B/C]\n\n")
+            f.write("---\n\n")
+    
+    # Append new reflection
+    with open(reflection_file, 'a', encoding='utf-8') as f:
+        f.write(f"\n## Notebook {notebook}: {section_title}\n\n")
+        f.write(f"**Completed:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+        f.write(reflection_content.strip())
+        f.write("\n\n---\n")
+    
+    return reflection_file

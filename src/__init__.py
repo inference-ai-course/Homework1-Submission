@@ -8,7 +8,7 @@ __version__ = "1.0.0"
 
 from .llm_client import LLMClient
 from .cost_tracker import CostTracker
-from .utils import estimate_tokens, estimate_cost, format_response, save_task_output
+from .utils import estimate_tokens, estimate_cost, format_response, save_task_output, append_to_reflection
 
 __all__ = [
     'LLMClient',
@@ -16,5 +16,6 @@ __all__ = [
     'estimate_tokens',
     'estimate_cost',
     'format_response',
-    'save_task_output'
+    'save_task_output',
+    'append_to_reflection'
 ]
