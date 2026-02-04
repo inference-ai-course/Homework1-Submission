@@ -1,0 +1,16 @@
+# Core dependencies
+jupyter>=1.0.0
+ipykernel>=6.0.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+pydantic>=2.0.0
+
+# Path A: Claude API
+anthropic>=0.18.0
+
+# Path B: Ollama
+ollama>=0.1.0
+
+# Optional: Advanced abstractions
+# langchain>=0.1.0
+# litellm>=1.0.0
