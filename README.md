@@ -12,6 +12,7 @@
 This homework assignment introduces you to Large Language Models (LLMs) and prompt engineering fundamentals. You will learn to interact with LLMs programmatically, master the CO-STAR prompt engineering framework, and begin building your course capstone project: a personalized research agent.
 
 By the end of this assignment, you will have hands-on experience with:
+
 - Making API calls to LLMs using Python
 - Structuring effective prompts using the CO-STAR framework
 - Generating and parsing structured outputs (JSON/XML)
@@ -40,6 +41,7 @@ Upon completion of this assignment, students will be able to:
 This assignment supports three deployment paths to accommodate different learning styles, budgets, and technical constraints:
 
 ### Path A: Claude API (Cloud)
+
 **Recommended for:** Students prioritizing result quality and course alignment
 
 - **Requirements:** Anthropic API key, internet connection
@@ -48,6 +50,7 @@ This assignment supports three deployment paths to accommodate different learnin
 - **Model:** Claude 3.5 Sonnet or Claude 3.5 Haiku
 
 ### Path B: Ollama (Local)
+
 **Recommended for:** Budget-conscious students and those learning deployment
 
 - **Requirements:** 8GB+ RAM, 10-20GB disk space
@@ -60,6 +63,7 @@ This assignment supports three deployment paths to accommodate different learnin
   - `qwen2.5:7b` - Strong reasoning
 
 ### Path C: Hybrid
+
 **Recommended for:** Most students
 
 - Use Ollama for experimentation and iteration
@@ -71,20 +75,23 @@ This assignment supports three deployment paths to accommodate different learnin
 ## 📋 Prerequisites
 
 ### Required for All Paths
+
 - Python 3.8 or higher
 - VS Code, Cursor IDE, or any IDE with Jupyter notebook support
 - Basic Python proficiency (functions, dictionaries, string manipulation)
 - 2-3 hours of focused work time
 
 ### Path A (Claude API)
-- Anthropic API account: https://console.anthropic.com
+
+- Anthropic API account: [https://console.anthropic.com](https://console.anthropic.com)
 - Valid API key with available credits
 - Stable internet connection
 
 ### Path B (Ollama)
+
 - Minimum 8GB RAM (16GB recommended)
 - 10-20GB free disk space
-- Ollama installed: https://ollama.ai
+- Ollama installed: [https://ollama.ai](https://ollama.ai)
 - Verification commands:
   ```bash
   ollama pull llama3.2:3b
@@ -92,7 +99,8 @@ This assignment supports three deployment paths to accommodate different learnin
   ```
 
 ### Optional Tools
-- **Cursor IDE** (https://cursor.sh) - AI-powered code editor (recommended)
+
+- **Cursor IDE** ([https://cursor.sh](https://cursor.sh)) - AI-powered code editor (recommended)
 - **Claude Code CLI** - Command-line agentic coding tool
 - **Git** for version control
 - **Discord** for course community
@@ -129,6 +137,7 @@ python -m venv .venv
 # Install all required packages
 pip install -r requirements.txt
 ```
+
 The `requirements.txt` should be set up already, but modify the optional section if needed, and feel free to use OpenAI API if you want. 
 
 ### Step 4: Configure API Keys (Path A or C)
@@ -157,6 +166,7 @@ ollama run llama3.2:3b "Hello, test!"
 ### Step 6: Open the Notebook in Your IDE
 
 #### Option A: VS Code
+
 ```bash
 # Install Python extension if not already installed
 # Open VS Code
@@ -167,6 +177,7 @@ code .
 ```
 
 #### Option B: Cursor IDE (Recommended)
+
 ```bash
 # Open Cursor
 cursor .
@@ -174,7 +185,6 @@ cursor .
 # Open notebooks/00_setup_verification.ipynb first
 # Select kernel: Python Environments → your virtual environment
 ```
-
 
 ---
 
@@ -225,12 +235,14 @@ Homework1-Submission/
 The homework is organized into 8 sections delivered across the notebook sequence in `notebooks/` (run in order from `00` to `08`):
 
 ### Section 1: Environment Setup & Tool Selection (30 min)
+
 - Choose deployment path (Claude/Ollama/Hybrid)
 - Verify installation and configuration
 - Test connectivity with simple API call
 - **Pre-configured:** Environment checks and validation cells
 
 ### Section 2: LLM Basics - First API Call (15 min)
+
 - Understand request/response cycle
 - System vs User prompts
 - Temperature and generation parameters
@@ -238,6 +250,7 @@ The homework is organized into 8 sections delivered across the notebook sequence
 - **Pre-configured:** Helper functions for API calls
 
 ### Section 3: Prompt Engineering with CO-STAR (30 min)
+
 - **C**ontext: Providing background information
 - **O**bjective: Defining clear goals
 - **S**tyle: Formal vs casual communication
@@ -247,6 +260,7 @@ The homework is organized into 8 sections delivered across the notebook sequence
 - **Pre-configured:** Interactive exercises with templates
 
 ### Section 4: Structured Outputs (25 min)
+
 - JSON formatting and parsing
 - XML formatting and parsing
 - Schema validation with Pydantic
@@ -254,6 +268,7 @@ The homework is organized into 8 sections delivered across the notebook sequence
 - **Pre-configured:** Validation schemas and parsing utilities
 
 ### Section 5: Chain-of-Thought Prompting (20 min)
+
 - Theoretical foundation
 - Implementation techniques
 - Comparative analysis (with/without CoT)
@@ -261,6 +276,7 @@ The homework is organized into 8 sections delivered across the notebook sequence
 - **Pre-configured:** Side-by-side comparison cells
 
 ### Section 6: Model Comparison & Limitations (25 min)
+
 - Systematic model comparison
 - Speed vs quality tradeoffs
 - Cost analysis (cloud vs local)
@@ -268,6 +284,7 @@ The homework is organized into 8 sections delivered across the notebook sequence
 - **Pre-configured:** Comparison framework and logging templates
 
 ### Section 7: Introduction to MCP (25 min)
+
 - Model Context Protocol overview
 - Agent architecture concepts
 - Tool integration planning
@@ -275,6 +292,7 @@ The homework is organized into 8 sections delivered across the notebook sequence
 - **Pre-configured:** Conceptual diagrams and code scaffolding
 
 ### Section 8: Project Kickoff (30 min)
+
 - Research agent definition
 - Mission statement formulation
 - Model selection justification
@@ -334,6 +352,7 @@ PATH = "A"  # Options: "A" (Claude), "B" (Ollama), "C" (Hybrid)
 ### Cursor IDE Features
 
 If using Cursor IDE, you can:
+
 - Use `Cmd/Ctrl + K` to chat with AI about code
 - Highlight code and ask AI for explanations
 - Use AI to help debug errors
@@ -346,14 +365,13 @@ If using Cursor IDE, you can:
 ### What Students Must Do
 
 1. **Complete all notebooks in `notebooks/` (`00` through `08`)**
-   - Run all code cells
-   - Complete TODO sections
-   - Review markdown instructions and outputs
-
+  - Run all code cells
+  - Complete TODO sections
+  - Review markdown instructions and outputs
 2. **Generate final reflection artifacts in `outputs/`**
-   - `outputs/homework_reflection.md` (primary graded artifact)
-   - `outputs/my_project_definition.md` (project definition artifact)
-   - The notebook workflow should auto-generate the reflection draft; students should review and polish before submission.
+  - `outputs/homework_reflection.md` (primary graded artifact)
+  - `outputs/my_project_definition.md` (project definition artifact)
+  - The notebook workflow should auto-generate the reflection draft; students should review and polish before submission.
 
 ### What Students Submit to Canvas
 
@@ -378,14 +396,17 @@ Your submission will be considered complete when:
 
 ## 📊 Grading Rubric
 
-| Component | Weight | Criteria |
-|-----------|--------|----------|
-| Homework Reflection (`outputs/homework_reflection.md`) | 70% | Depth of insight, evidence from notebook runs, clarity of reasoning |
-| Project Definition (`outputs/my_project_definition.md`) | 20% | Clear scope, feasibility, and alignment with reflection findings |
-| Notebook Completion Check | 10% | All notebooks run end-to-end with completed TODOs |
-| **Total** | **100%** | |
+
+| Component                                               | Weight   | Criteria                                                            |
+| ------------------------------------------------------- | -------- | ------------------------------------------------------------------- |
+| Homework Reflection (`outputs/homework_reflection.md`)  | 70%      | Depth of insight, evidence from notebook runs, clarity of reasoning |
+| Project Definition (`outputs/my_project_definition.md`) | 20%      | Clear scope, feasibility, and alignment with reflection findings    |
+| Notebook Completion Check                               | 10%      | All notebooks run end-to-end with completed TODOs                   |
+| **Total**                                               | **100%** |                                                                     |
+
 
 ### Grading Scale
+
 - **A (90-100%):** Exceptional work with creative extensions
 - **B (80-89%):** Complete work meeting all requirements
 - **C (70-79%):** Adequate work with minor gaps
@@ -398,17 +419,21 @@ Your submission will be considered complete when:
 
 ### Claude API (Path A)
 
-| Model | Input Cost | Output Cost | Homework Est. | Project Est. |
-|-------|-----------|-------------|---------------|--------------|
-| Claude 3.5 Sonnet | $3/1M tokens | $15/1M tokens | $1-2 | $10-20 |
-| Claude 3.5 Haiku | $1/1M tokens | $5/1M tokens | $0.50-1 | $3-8 |
+
+| Model             | Input Cost   | Output Cost   | Homework Est. | Project Est. |
+| ----------------- | ------------ | ------------- | ------------- | ------------ |
+| Claude 3.5 Sonnet | $3/1M tokens | $15/1M tokens | $1-2          | $10-20       |
+| Claude 3.5 Haiku  | $1/1M tokens | $5/1M tokens  | $0.50-1       | $3-8         |
+
 
 ### Ollama (Path B)
+
 - **Software Cost:** $0
 - **Hardware:** May require RAM upgrade ($50-150 if needed)
 - **Electricity:** <$0.05 per session
 
 ### Hybrid (Path C)
+
 - **Learning Phase:** $0 (Ollama)
 - **Deliverables:** $1-5 (Claude)
 - **Total Homework:** $1-5
@@ -449,36 +474,31 @@ jupyter lab  # Traditional Jupyter
 ### Detailed Workflow
 
 1. **Choose Your Path** (5 min)
-   - Review deployment options
-   - Consider budget, hardware, learning goals
-   - Document choice in notebook Section 1
-
+  - Review deployment options
+  - Consider budget, hardware, learning goals
+  - Document choice in notebook Section 1
 2. **Verify Setup** (10 min)
-   - Run Section 1 verification cells
-   - Confirm API connectivity or Ollama installation
-   - Troubleshoot any issues
-
+  - Run Section 1 verification cells
+  - Confirm API connectivity or Ollama installation
+  - Troubleshoot any issues
 3. **Complete Core Sections** (90 min)
-   - Work through Sections 2-7 sequentially
-   - Complete all TODO items
-   - Run experiments and document observations
-
+  - Work through Sections 2-7 sequentially
+  - Complete all TODO items
+  - Run experiments and document observations
 4. **Project Kickoff** (30 min)
-   - Complete Section 8
-   - Draft your project definition
-   - Build initial prototype
-
+  - Complete Section 8
+  - Draft your project definition
+  - Build initial prototype
 5. **Documentation** (20 min)
-   - Use the notebook's final automation flow to generate `outputs/homework_reflection.md`
-   - Finalize `outputs/my_project_definition.md`
-   - Review and polish both Canvas submission files
-
+  - Use the notebook's final automation flow to generate `outputs/homework_reflection.md`
+  - Finalize `outputs/my_project_definition.md`
+  - Review and polish both Canvas submission files
 6. **Submit** (5 min)
-   - Verify the two required files are up to date:
-     - `outputs/homework_reflection.md`
-     - `outputs/my_project_definition.md`
-   - Commit and push to your repository
-   - Submit both files to Canvas
+  - Verify the two required files are up to date:
+    - `outputs/homework_reflection.md`
+    - `outputs/my_project_definition.md`
+  - Commit and push to your repository
+  - Submit both files to Canvas
 
 ---
 
@@ -487,12 +507,14 @@ jupyter lab  # Traditional Jupyter
 ### Common Issues
 
 #### Issue: "ModuleNotFoundError: No module named 'anthropic'"
+
 ```bash
 # Solution: Install dependencies in Terminal
 pip install -r requirements.txt
 ```
 
 #### Issue: "API key not found"
+
 ```bash
 # Solution: Check .env file, did you created it? 
 cat .env  # Should show ANTHROPIC_API_KEY=...
@@ -503,6 +525,7 @@ load_dotenv(override=True)
 ```
 
 #### Issue: Ollama not responding
+
 ```bash
 # Check if Ollama is running
 ollama list
@@ -513,6 +536,7 @@ ollama list
 ```
 
 #### Issue: Kernel not found in VS Code/Cursor
+
 ```bash
 # Install ipykernel in your virtual environment
 pip install ipykernel
@@ -522,6 +546,7 @@ python -m ipykernel install --user --name=venv
 ```
 
 #### Issue: Rate limit errors with Claude API
+
 ```python
 # Add delays between API calls
 import time
@@ -544,6 +569,7 @@ time.sleep(1)  # Wait 1 second between calls
 ## 📚 Resources
 
 ### Official Documentation
+
 - [Anthropic API Documentation](https://docs.anthropic.com)
 - [Anthropic Prompt Engineering Guide](https://docs.anthropic.com/claude/docs/prompt-engineering)
 - [Ollama Documentation](https://github.com/ollama/ollama)
@@ -551,21 +577,25 @@ time.sleep(1)  # Wait 1 second between calls
 - [Model Context Protocol](https://modelcontextprotocol.io/)
 
 ### IDE Documentation
+
 - [VS Code Jupyter Extension](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)
 - [Cursor IDE Documentation](https://cursor.sh/docs)
 - [JupyterLab Documentation](https://jupyterlab.readthedocs.io/)
 
 ### Python Libraries
+
 - [Python dotenv](https://pypi.org/project/python-dotenv/)
 - [Pydantic](https://docs.pydantic.dev/)
 - [Requests](https://requests.readthedocs.io/)
 
 ### Community
+
 - Course Discord Server: [Link provided by instructor]
 - Course GitHub Repository: [Link provided by instructor]
 - Office Hours: [Schedule provided by instructor]
 
 ### Recommended Reading
+
 - "Attention Is All You Need" - Transformer paper
 - "Chain-of-Thought Prompting Elicits Reasoning" - Wei et al.
 - Anthropic's prompt engineering cookbook
@@ -634,44 +664,56 @@ time.sleep(1)  # Wait 1 second between calls
 For students seeking additional depth and extra credit (up to 10%):
 
 ### 1. Multi-Model Ensemble (5% extra credit)
+
 Implement a system that:
+
 - Queries 3+ different models with the same prompt
 - Compares responses using automated metrics
 - Implements voting/consensus mechanism
 - Documents which model types excel at which tasks
 
 ### 2. Cost Optimizer (3% extra credit)
+
 Build an automatic model selector that:
+
 - Analyzes task complexity
 - Estimates token usage
 - Selects cheapest suitable model
 - Tracks cost savings over naive approach
 
 ### 3. Cursor IDE Deep Dive (2% extra credit)
+
 Complete the entire assignment in Cursor and document:
+
 - How AI-assist helped or hindered
 - Specific prompts used with Cursor AI
 - Comparison with traditional coding
 - Best practices discovered
 
 ### 4. MCP Server Implementation (5% extra credit)
+
 Preview of Week 10:
+
 - Set up a basic MCP server
 - Implement file system tool
 - Connect to Claude Desktop
 - Document setup process for classmates
 
 ### 5. Comprehensive Benchmark Suite (5% extra credit)
+
 Create systematic measurements:
+
 - Speed tests across models
 - Quality assessments (automated + manual)
 - Cost per quality point analysis
 - Interactive visualization of results
 
 ### 6. Helping others (1% extra credit for each response, up to 5%)
+
 Post question or answer in Discord `support-and-questions` channel
 
 **Submission:** 
+
 - Add bonus work to `outputs/bonus_challenges.md` with code in separate notebook section.
 - Post the screenshort of discord discussion to `outputs/bonus_challenges.md`.
 
@@ -681,23 +723,27 @@ Post question or answer in Discord `support-and-questions` channel
 
 ### Recommended Schedule
 
-| Day | Tasks | Time |
-|-----|-------|------|
-| **Day 1** | Setup complete, Section 1 | 30 min |
-| **Day 2** | Sections 2-3 complete | 1 hour |
-| **Day 3** | Sections 4-5 complete | 1 hour |
+
+| Day       | Tasks                                     | Time   |
+| --------- | ----------------------------------------- | ------ |
+| **Day 1** | Setup complete, Section 1                 | 30 min |
+| **Day 2** | Sections 2-3 complete                     | 1 hour |
+| **Day 3** | Sections 4-5 complete                     | 1 hour |
 | **Day 4** | Section 6 complete, start limitations log | 45 min |
-| **Day 5** | Section 7 complete | 30 min |
-| **Day 6** | Section 8 + project proposal | 1 hour |
-| **Day 7** | Review, polish, submit | 30 min |
+| **Day 5** | Section 7 complete                        | 30 min |
+| **Day 6** | Section 8 + project proposal              | 1 hour |
+| **Day 7** | Review, polish, submit                    | 30 min |
+
 
 ### Important Dates
+
 - **Assignment Release:** After each course
 - **Office Hours:** Wed. 7-8pm (CT)
 - **Submission Deadline:** Sunday 11:59pm
 - **Late Submission Deadline:** Tuesday night (with penalty)
 
 ### Late Policy
+
 - Up to 24 hours late (Monday): -10%
 - Up to 48 hours late (Tuesday): -25%
 - Beyond 48 hours: Contact instructor
@@ -707,6 +753,7 @@ Post question or answer in Discord `support-and-questions` channel
 ## 🤝 Collaboration Policy
 
 ### Permitted
+
 - Discussing concepts and approaches
 - Helping each other debug setup issues
 - Sharing resources and documentation
@@ -714,6 +761,7 @@ Post question or answer in Discord `support-and-questions` channel
 - Pair programming for learning (but submit individual code)
 
 ### Not Permitted
+
 - Copying code from other students
 - Submitting someone else's work as your own
 - Sharing complete solutions before deadline
@@ -721,12 +769,14 @@ Post question or answer in Discord `support-and-questions` channel
 - Having someone else write your code
 
 ### AI Tools Policy
+
 - You **may** use AI assistants (Claude, GPT, Cursor AI, etc.) to help learn concepts
 - You **must** understand and be able to explain all submitted code
 - You **must** document AI assistance in comments when used significantly
 - You **should** experiment with prompting the AI effectively (it's part of learning!)
 
 **Example acceptable AI use:**
+
 ```python
 # Used Claude to help debug this API call error
 # Original error was "401 Unauthorized"
@@ -744,9 +794,9 @@ Post question or answer in Discord `support-and-questions` channel
 2. **Repository Guide:** Re-check `README.md` and notebook markdown instructions
 3. **Discord - Search:** Your question may already be answered
 4. **Discord - Ask:** Post in `#support-and-discussions` channel
-   - Include error messages and screenshots
-   - Mention your path (A/B/C) and IDE
-   - Share relevant code snippets
+  - Include error messages and screenshots
+  - Mention your path (A/B/C) and IDE
+  - Share relevant code snippets
 5. **Office Hours:** Attend for live help with complex issues
 6. **Email Instructor:** For private or urgent matters only
 
@@ -755,6 +805,7 @@ Post question or answer in Discord `support-and-questions` channel
 Found a bug in course materials or the pre-configured notebook?
 
 **Submit a GitHub issue with:**
+
 - Clear description of the problem
 - Steps to reproduce
 - Expected vs actual behavior
@@ -766,20 +817,22 @@ Found a bug in course materials or the pre-configured notebook?
 **Problem:** Section 3 code cell raises KeyError
 
 **Steps to Reproduce:**
+
 1. Run cells in order through Section 3
 2. Cell 42 raises error
 
 **Error Message:**
+
 ```
 KeyError: 'response'
 ```
 
 **Environment:**
+
 - OS: macOS 14.1
 - Python: 3.11.5
 - Path: A (Claude API)
 - IDE: VS Code
-
 
 ---
 
@@ -789,16 +842,12 @@ This assignment directly supports the following course-level learning outcomes:
 
 - **LO1:** Understand fundamental concepts of Large Language Models
   - *Assessment:* Section 2, model comparison in Section 6
-  
 - **LO2:** Apply prompt engineering best practices
   - *Assessment:* CO-STAR implementation in Section 3
-  
 - **LO3:** Evaluate tradeoffs in AI system design
   - *Assessment:* Resource analysis, limitations log
-  
 - **LO4:** Build functional AI applications
   - *Assessment:* Working prototype in Section 8
-  
 - **LO5:** Document and communicate technical decisions
   - *Assessment:* Project proposal, all markdown documentation
 
@@ -809,11 +858,13 @@ This assignment directly supports the following course-level learning outcomes:
 Course materials © 2025 inferenceAI. Licensed for educational use only.
 
 **Students may:**
+
 - Use materials for completing course assignments
 - Reference materials for personal learning
 - Share concepts learned (not solutions) with others
 
 **Students may not:**
+
 - Redistribute course materials publicly
 - Use materials for commercial purposes
 - Share solutions publicly before deadline

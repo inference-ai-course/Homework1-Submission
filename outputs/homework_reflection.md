@@ -1543,3 +1543,117 @@ After: ___/5
 [Encouragement or advice]
 
 ---
+
+## Notebook 04: Task 1 - JSON Extractor
+
+**Completed:** 2026-03-26 20:26:12
+
+### Extraction Quality
+
+**Did it correctly extract all fields?** [Yes/No]
+
+[What worked well? What was missed?]
+
+### Prompt Effectiveness
+
+**How clear was your prompt?** [Rate 1-5]: ___/5
+
+[What would you change to improve it?]
+
+### Real-World Application
+
+**Where would you use this review extractor?**
+
+[Describe a practical use case]
+
+### Challenges Encountered
+
+[What was difficult about getting structured output?]
+
+[How did you solve it?]
+
+---
+
+## Notebook 04: Task 2 - Multi-Record Extraction
+
+**Completed:** 2026-03-26 20:26:16
+
+### Multi-Record Extraction
+
+**Number of items in text:** [X]
+
+**Number correctly extracted:** [X]
+
+**Accuracy:** [X/X = XX%]
+
+### Challenges with Arrays
+
+[What was harder about extracting multiple items vs single items?]
+
+### Data Quality
+
+[Were all fields correctly identified for each item?]
+
+[Any patterns in what was missed or wrong?]
+
+### Scaling Considerations
+
+**How would this work with 100 items?**
+
+[Discuss token limits, cost, reliability]
+
+### Production Readiness
+
+[Would you trust this for production use? Why or why not?]
+
+[What safeguards would you add?]
+
+---
+
+## Notebook 04: Task 3 - Error Recovery System
+
+**Completed:** 2026-03-26 20:26:18
+
+### Retry System Performance
+
+**Succeeded on attempt:** [1/2/3/Failed]
+
+**What changed between attempts?**
+
+[Describe how the prompt evolved]
+
+### Error Recovery Strategies
+
+**Most effective strategy:** [Basic/Explicit/Example-based]
+
+[Why do you think this worked best?]
+
+### Production Considerations
+
+**Is 3 retries enough?**
+
+no, it's not enough.
+
+**What's the cost of retries?**
+
+[Calculate: X attempts × Y tokens × $Z per token]
+
+**When would you give up?**
+
+[Define failure criteria]
+
+### Alternative Approaches
+
+**Besides retrying, what else could you do?**
+
+1. [Alternative 1]
+2. [Alternative 2]
+3. [Alternative 3]
+
+### System Design
+
+**How would you integrate this into a production pipeline?**
+
+[Describe the full flow from input to validated output]
+
+---
