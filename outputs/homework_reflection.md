@@ -1543,3 +1543,52 @@ After: ___/5
 [Encouragement or advice]
 
 ---
+
+## Notebook 02: Task 1 - Custom System Prompt
+
+**Completed:** 2026-03-26 23:36:38
+
+### What I Learned
+
+Creating a custom system prompt can help generate answers that better fit the client’s needs.
+
+### How the System Prompt Affected the Response
+
+The system prompt gives the model guidelines on how questions should be answered, such as role, tone, and output format. The answers will be more standardized.
+
+### Real-World Applications
+### [Where would you use this type of system prompt in practice?]
+Within a company, the system prompt can be tailored to each department’s needs. For personal use, it can be adapted to different projects, such as travel planning or course learning.
+
+---
+
+## Notebook 02: Task 2 - Temperature Exploration
+
+**Completed:** 2026-03-27 11:06:31
+
+### Temperature 0.0 Analysis
+
+[What did you notice about consistency and predictability?]
+
+### Temperature 0.5 Analysis
+
+[What balance did you see between creativity and consistency?]
+
+### Temperature 1.0 Analysis
+
+[How creative/varied was this response?]
+
+### Conclusion
+
+**Best temperature for this task:** [0.0 / 0.5 / 1.0]
+
+**Reasoning:** [Explain your choice]
+
+### When to Use Each Temperature
+
+- **Temperature 0.0:** [Your use cases - e.g., factual Q&A, data extraction]
+- **Temperature 0.5:** [Your use cases - e.g., general explanations, summaries]
+- **Temperature 1.0:** [Your use cases - e.g., creative writing, brainstorming]
+
+---
+
