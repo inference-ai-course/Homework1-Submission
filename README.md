@@ -1,3 +1,6 @@
+Folk from Inference-AI-Course Homework
+It's for Homework Submission
+
 # Week 1: Introduction to Large Language Models & Prompt Engineering
 
 **Course:** Machine Learning Engineer in the Generative AI Era  
