@@ -23,6 +23,8 @@ class LLMClient:
         self.path = path
         self.claude_client = None
         self.default_model = None
+        self.default_claude_model = None
+        self.default_ollama_model = None
         
         # Initialize based on path
         if path in ["A", "C"]:
@@ -41,10 +43,12 @@ class LLMClient:
             self.claude_client = anthropic.Anthropic(api_key=api_key)
             
             # Claude 4.5 model names
-            self.default_model = "claude-sonnet-4-5-20250929"
+            self.default_claude_model = "claude-sonnet-4-5-20250929"
+            if self.default_model is None:
+                self.default_model = self.default_claude_model
             
             print("✓ Claude API client initialized")
-            print(f"  Default model: {self.default_model}")
+            print(f"  Default model: {self.default_claude_model}")
             print(f"  Available: Opus 4.5, Sonnet 4.5, Haiku 4.5")
         except Exception as e:
             print(f"❌ Failed to initialize Claude: {e}")
@@ -58,10 +62,12 @@ class LLMClient:
             if response.status_code == 200:
                 models = response.json().get('models', [])
                 if models:
-                    self.default_model = models[0]['name']
+                    self.default_ollama_model = models[0]['name']
+                    if self.default_model is None:
+                        self.default_model = self.default_ollama_model
                     print("✓ Ollama client initialized")
                     print(f"  Available models: {[m['name'] for m in models]}")
-                    print(f"  Default model: {self.default_model}")
+                    print(f"  Default model: {self.default_ollama_model}")
                 else:
                     print("⚠ Ollama running but no models found")
                     print("  Run: ollama pull llama3.2:3b")
@@ -105,14 +111,14 @@ class LLMClient:
         elif self.path == "C":  # Hybrid
             use_claude_backend = use_claude if use_claude is not None else False
         
-        # Select model if not specified
-        if model is None:
-            model = self.default_model
-        
         # Generate response
         if use_claude_backend:
+            if model is None:
+                model = self.default_claude_model or self.default_model
             return self._generate_claude(prompt, system, model, temperature, max_tokens)
         else:
+            if model is None:
+                model = self.default_ollama_model or self.default_model
             return self._generate_ollama(prompt, system, model, temperature, max_tokens)
     
     def _generate_claude(

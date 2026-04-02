@@ -272,12 +272,12 @@ def append_to_reflection(
     output_dir: Optional[str] = None
 ) -> str:
     """
-    Append reflection to a single consolidated markdown file.
+    Save reflection to a single consolidated markdown file.
     
     Args:
         notebook: Notebook number (e.g., "02")
         section_title: Title of the section (e.g., "Task 1: Custom System Prompt")
-        reflection_content: The reflection text to append
+        reflection_content: The reflection text to save
         output_dir: Directory containing the reflection file
     
     Returns:
@@ -285,6 +285,7 @@ def append_to_reflection(
     """
     from datetime import datetime
     import os
+    import re
     
     if output_dir is None:
         output_dir = 'outputs'
@@ -292,20 +293,51 @@ def append_to_reflection(
     os.makedirs(output_dir, exist_ok=True)
     
     reflection_file = os.path.join(output_dir, 'homework_reflection.md')
+    header = (
+        "# Week 1: LLM Introduction - Homework Reflection\n\n"
+        "**Student Name:** [Your Name Here]\n\n"
+        "**Path Selected:** [A/B/C]\n\n"
+        "---\n\n"
+    )
     
     # Create file with header if it doesn't exist
     if not os.path.exists(reflection_file):
         with open(reflection_file, 'w', encoding='utf-8') as f:
-            f.write("# Week 1: LLM Introduction - Homework Reflection\n\n")
-            f.write("**Student Name:** [Your Name Here]\n\n")
-            f.write("**Path Selected:** [A/B/C]\n\n")
-            f.write("---\n\n")
-    
-    # Append new reflection
-    with open(reflection_file, 'a', encoding='utf-8') as f:
-        f.write(f"\n## Notebook {notebook}: {section_title}\n\n")
-        f.write(f"**Completed:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-        f.write(reflection_content.strip())
-        f.write("\n\n---\n")
+            f.write(header)
+
+    with open(reflection_file, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    section_heading = f"## Notebook {notebook}: {section_title}"
+    section_block = (
+        f"{section_heading}\n\n"
+        f"**Completed:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+        f"{reflection_content.strip()}\n\n"
+        "---\n\n"
+    )
+
+    # Keep the original section order while replacing rerun sections in place.
+    section_pattern = re.compile(
+        rf"(?ms)^{re.escape(section_heading)}\n.*?(?=^## Notebook |\Z)"
+    )
+    matches = list(section_pattern.finditer(content))
+
+    if matches:
+        prefix = content[:matches[0].start()]
+        suffix_parts = []
+        cursor = matches[0].end()
+
+        for match in matches[1:]:
+            suffix_parts.append(content[cursor:match.start()])
+            cursor = match.end()
+
+        suffix_parts.append(content[cursor:])
+        updated_content = prefix + section_block + ''.join(suffix_parts)
+    else:
+        base_content = content.rstrip()
+        updated_content = f"{base_content}\n\n{section_block}" if base_content else section_block
+
+    with open(reflection_file, 'w', encoding='utf-8') as f:
+        f.write(updated_content)
     
     return reflection_file

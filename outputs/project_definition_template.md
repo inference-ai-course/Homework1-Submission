@@ -2,141 +2,166 @@
 # PROJECT DEFINITION TEMPLATE
 
 ## 1. PROJECT TITLE
-[Give your project a name]
-
-Example: "Multi-Paper Methodology Comparison Tool"
+Quality & Safety Regression Harness for LLM Applications
 
 ## 2. THE PROBLEM
-What research problem are you solving?
-
-[Be specific! What's painful in your current workflow?]
-
-Example: "I need to compare how different papers approach sentiment 
-analysis, but manually reading 20 papers and extracting their methods 
-takes days."
+A system may silently become less accurate, less safe, less consistent in formatting, or weaker in bilingual English/French behavior. Manual checking is slow, subjective, and difficult to repeat. 
+I want a practical way to evaluate and compare LLM behavior so I can detect regressions before deploying or trusting a new version.
 
 ## 3. YOUR SOLUTION
-How will your agent solve this problem?
+My agent will act as a regression evaluation harness for LLM systems.
 
-[Describe the agent's behavior at a high level]
-
-Example: "My agent will: (1) search for papers on a topic, (2) extract 
-methodology sections, (3) identify key techniques, (4) create a 
-comparison table, (5) highlight novel approaches."
+It will:
+1. load a set of predefined evaluation test cases
+2. run them against a baseline configuration and a candidate configuration
+3. collect the outputs in a structured format
+4. score them on dimensions such as instruction following, structure, safety, and bilingual consistency
+5. compare results and flag regressions
+6. generate a final summary report showing where the candidate improved or got worse
 
 ## 4. USER WORKFLOW
-How will someone use your agent?
-
-[Describe the user interaction]
-
-Example:
-- User inputs: Research topic, number of papers to analyze
-- Agent does: Search, extract, analyze, compare
-- User receives: Comparison table + insights document
+- User inputs: a test case dataset, a baseline setup, and a candidate setup
+- Agent does:
+  - send each test prompt to both versions
+  - capture outputs
+  - score outputs with a structured rubric
+  - compare scores across versions
+  - identify regressions and major failures
+- User receives:
+  - a per-test comparison table
+  - a regression summary
+  - a final report highlighting the most important quality and safety changes
+For the first version, the user will likely run this from a notebook or Python script rather than a full UI.
 
 ## 5. COMPONENTS
 Which techniques from the course will you use?
 
-[Check all that apply, explain how]
-
-☐ CO-STAR prompting - [How will you use it?]
-☐ Structured outputs (JSON/XML) - [How will you use it?]
-☐ Chain-of-thought - [How will you use it?]
-☐ Model selection - [Which models for which tasks?]
-☐ MCP/Tool use - [Which tools?]
-☐ Multi-step workflow - [Describe the flow]
-☐ Other: [What else?]
+☑ CO-STAR prompting - I will use CO-STAR to design consistent evaluator prompts so the scoring instructions are clear, repeatable, and targeted.
+☑ Structured outputs (JSON/XML) - I will require the evaluator to return structured fields such as  test_id, pass/fail, quality score, safety score, bilingual score, reason, and regression_flag.
+☑ Chain-of-thought - I will use reasoning-based evaluation prompts so the model can judge outputs step by step before returning the final structured result.
+☑ Model selection - I may use one model for generation and another for evaluation, or compare different model sizes/cost levels for the same task.
+☐ MCP/Tool use - Not required for version 1. If time allows, I may add file or dataset loading tools later.
+☑ Multi-step workflow - The project has the following pipeline: load tests → run baseline → run candidate → score outputs → compare results → generate report.
+☑ Other: Reporting and analysis - I will generate a markdown and/or CSV regression report for easy review.
 
 ## 6. SUCCESS CRITERIA
 How will you know if your project succeeded?
 
-[Define measurable success]
+- Functional: The system can run a full evaluation set end-to-end without manual intervention except setup.
+- Structured: The evaluator returns valid structured results for at least 90% of test cases.
+- Useful: The report clearly shows which candidate outputs improved, worsened, or failed.
+- Quality: The scoring dimensions are understandable and consistent enough to support decision-making.
+- Demo-able: I can show the complete workflow in about 5 minutes.
+- Practical: The project is useful for testing prompt or model changes in a realistic AI workflow.
 
-Example:
-- Functional: Correctly extracts methods from 80%+ of papers
-- Useful: Saves me at least 4 hours on my next literature review
-- Quality: Comparison table is accurate and readable
-- Demo-able: Can show end-to-end workflow in 5 minutes
 
 ## 7. SCOPE
 What's IN scope and OUT of scope?
 
 IN SCOPE (Must have):
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+- A small evaluation dataset of around 20-30 test cases
+- Baseline vs candidate comparison
+- Structured scoring across key dimensions
+- Regression detection logic
+- Final markdown or CSV report
+- English and French test coverage in at least a basic form
 
 OUT OF SCOPE (Nice to have, but not now):
-- [Feature that would be cool but not essential]
-- [Feature you might add later]
+- Fine-tuning any model
+- Full enterprise Proprietary LLM models integration
+- Advanced dashboard or database backend
+- Large-scale benchmark datasets
+- Automated retraining or optimization loops
+- Full production web app
+- Human annotation platform
 
 ## 8. DATA SOURCES
 What data will your agent work with?
 
-[Where does the data come from?]
-
-Example: arXiv papers (via search API), user-uploaded PDFs, etc.
+The project will work mainly with a custom evaluation dataset that I create.
+The dataset will include:
+- prompt-following tasks
+- structured extraction tasks
+- safety-sensitive prompts
+- English test cases
+- French test cases
+- a few bilingual consistency checks
+If needed, I may also include a small number of synthetic or manually written examples to expand the test set.
 
 ## 9. TECH STACK
 What tools/libraries will you use?
 
-[List the technical components]
-
-Example:
-- LLM: Claude Sonnet (API) or Llama 3.1 (local)
-- Tools: arXiv API, PyPDF for parsing, pandas for tables
-- MCP: brave-search server, filesystem server
-- Output: Markdown reports, CSV tables
+- LLM:
+  - open-source LLMs(Llama,Qwen, DeepSeek etc) for generation and/or comparison
+  - optionally Chatgpt/Claude/Gemini API later for evaluation or comparison
+- Python: pandas, matplotlib (optional)
+- JSON, Markdown and CSV
+- Possibly:
+  - Hugging Face transformers or API wrappers
+  - simple local file-based test dataset
 
 ## 10. TIMELINE
 What's your week-by-week plan?
 
 Week 1 (This week):
-  - [Task 1]
-  - [Task 2]
+- Finalize project definition
+- Design evaluation dimensions and scoring rubric
+- Create initial test dataset
+- Build simple baseline vs candidate execution flow
 
 Week 2-3:
-  - [Task 3]
-  - [Task 4]
+- Implement structured evaluator prompts
+- Save outputs and scores in JSON/CSV
+- Add regression comparison logic
+- Generate first working report
 
 Week 4 (Project Insight I):
-  - Demo: [What will you show?]
-  - Get feedback
+- Demo: show a small end-to-end evaluation on a baseline and candidate setup
+- Get feedback on scope, scoring quality, and usefulness
 
 Week 5-6:
-  - [Refinements based on feedback]
+- Improve prompt quality and scoring consistency
+- Add better bilingual and safety test coverage
+- Refine report format and summary logic
 
 Week 7 (Project Insight II):
-  - Finalize scope
+- Finalize scope
+- Decide which optional features to keep or drop
 
 Week 8-10:
-  - [Final implementation]
-  - [Testing]
-  - [Documentation]
+- Polish implementation
+- Test reliability on more cases
+- Improve documentation
+- Prepare final demo and explanation
 
 Week 10 (Final Presentation):
-  - Demo complete agent
+- Demo the complete regression harness
+- Show one example where the system catches a meaningful regression
 
 ## 11. RISKS & MITIGATION
 What could go wrong?
 
-Risk 1: [What could go wrong?]
-  Mitigation: [How will you handle it?]
+Risk 1: The evaluator model may be inconsistent or subjective.
+Mitigation: Keep the rubric simple, use structured outputs, and test the same cases repeatedly to check stability.
 
-Risk 2: [What could go wrong?]
-  Mitigation: [How will you handle it?]
+Risk 2: The project becomes too large if I try to support too many models or features.
+Mitigation: Limit version 1 to one baseline, one candidate, and a small dataset.
 
-Example:
-Risk: API rate limits on paper searches
-  Mitigation: Implement caching, use local models as fallback
+Risk 3: Bilingual evaluation may be harder than expected.
+Mitigation: Start with a small English/French subset and use only a few clearly defined bilingual checks.
+
+Risk 4: Open-source models may be harder to configure than expected.
+Mitigation: Keep the architecture model-agnostic so I can swap models later without redesigning the project.
+
 
 ## 12. STRETCH GOALS
 What would you add if you had more time?
+- Add cost and latency tracking
+- Add support for user-uploaded test datasets
+- Add a Proprietary LLM models compatible adapter for API-based testing
+- Add severity ranking for regressions
+- Add pairwise side-by-side judging
+- Support more evaluation dimensions
+- Add prompt version tracking over time
+- Add a simple dashboard or web UI
 
-[Nice-to-have features]
-
-Example:
-- Web UI instead of notebook
-- Support for more paper sources
-- Automated quality checks
-- Export to LaTeX
