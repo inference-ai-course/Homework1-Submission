@@ -183,8 +183,15 @@ class LLMClient:
             
             if response.status_code == 200:
                 data = response.json()
+                # Some models (e.g. Qwen 3.5) are "thinking" models where the
+                # actual answer is in the 'response' field but thinking tokens
+                # go to a separate 'thinking' field. If 'response' is empty,
+                # fall back to 'thinking'.
+                content = data.get('response', '') or ''
+                if not content.strip() and data.get('thinking'):
+                    content = data['thinking']
                 return {
-                    "content": data['response'],
+                    "content": content,
                     "model": model,
                     "usage": {
                         "input_tokens": data.get('prompt_eval_count', 0),

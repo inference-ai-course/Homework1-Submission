@@ -1,9 +1,9 @@
-# Path Selection: Path A
+# Path Selection: Path C
 
-**Selected:** Claude API (Cloud)
+**Selected:** Hybrid
 
 
-WHY I CHOSE PATH A: Claude API (Cloud)
+WHY I CHOSE PATH C: Hybrid
 
 [Replace this with your reasoning. Consider:]
 

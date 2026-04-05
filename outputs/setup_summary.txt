@@ -2,15 +2,15 @@
 ✅ Environment Setup Complete!
 
 Configuration:
-  Path: A (Claude API (Cloud))
-  Default Model: claude-sonnet-4-5-20250929
-
+  Path: C (Hybrid)
+  Default Model: qwen3.5:27b
+  
 Status:
   ✓ All modules imported
   ✓ LLMClient initialized
   ✓ First API call successful
   ✓ Cost tracking active
-
+  
 Next Steps:
   → Open notebooks/02_llm_basics.ipynb
   → Continue learning!
@@ -19,4 +19,4 @@ Files:
   • outputs/path_selection.md (your rationale)
   • src/config.py (path configuration)
 
-Setup completed: 2026-02-04 00:40:05
+Setup completed: 2026-04-05 15:58:37
